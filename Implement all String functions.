@@ -1,0 +1,50 @@
+1. Create a Sample Table with Data
+Before implementing string functions, let's create a sample table and insert some
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50),
+email VARCHAR(100)
+);
+INSERT INTO employees (id, name, department, email)
+VALUES (1, 'Alice Johnson', 'HR',
+'alice.johnson@example.com'),
+(2, 'Bob Smith', 'IT', 'bob.smith@example.com'),
+(3, 'Charlie Brown', 'Finance', 'charlie.brown@example.com');
+2. UPPER() - Convert to Uppercase
+Definition: Converts a string to uppercase.
+Example: Convert employee names to uppercase.
+SELECT UPPER(name) AS upper_name FROM employees;
+3. LOWER() - Convert to Lowercase
+Definition: Converts a string to lowercase.
+Example: Convert employee emails to lowercase.
+SELECT LOWER(email) AS lower_email FROM employees;
+4. LENGTH() - Find Length of a String
+Definition: Returns the number of characters in a string.
+Example: Find the length of each employee's name.
+SELECT name, LENGTH(name) AS name_length FROM employees
+5. SUBSTRING() - Extract Part of a String
+Definition: Extracts a substring from a string.
+Example: Extract the first 5 characters from employee names. SELECT
+name, SUBSTRING(name, 1, 5) AS name_part FROM employees;
+6. CONCAT() - Concatenate Strings
+Definition: Combines two or more strings.
+Example: Concatenate employee name and department.
+SELECT CONCAT(name, ' - ', department) AS full_info FROM employees;
+7. REPLACE() - Replace Substring in a String
+Definition: Replaces occurrences of a substring within a
+string. Example: Replace '.' with '-' in email addresses.
+SELECT email, REPLACE(email, '.', '-') AS modified_email FROM employees;
+8. TRIM() - Remove Leading and Trailing Spaces
+Definition: Removes spaces from the beginning and end of a
+string. Example: Trim spaces from employee names.
+SELECT name, TRIM(name) AS trimmed_name FROM employees;
+9. LEFT() - Get Left Part of a String
+Definition: Extracts a specified number of characters from the
+left. Example: Get the first 3 characters of employee names.
+SELECT name, LEFT(name, 3) AS left_part FROM employees;
+10. RIGHT() - Get Right Part of a String
+Definition: Extracts a specified number of characters from the
+right. Example: Get the last 3 characters of employee names.
+SELECT name, RIGHT(name, 3) AS right_part FROM employees;
