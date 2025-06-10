@@ -1,0 +1,71 @@
+1. Create Sample Tables with Data
+Before working with triggers, let's create a sample table and insert
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000);
+We will also create a log table to store changes:
+CREATE TABLE employee_log (
+log_id INT PRIMARY KEY AUTO_INCREMENT,
+employee_id INT,
+action_type VARCHAR(50),
+log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+2. Creating an AFTER INSERT Trigger
+Definition: This trigger runs after a new row is
+inserted. Example: Log employee insertions.
+DELIMITER //
+CREATE TRIGGER after_employee_insert
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+INSERT INTO employee_log (employee_id, action_type)
+VALUES (NEW.id, 'INSERT');
+END //
+DELIMITER ;
+Test the Trigger:
+INSERT INTO employees (name, department, salary) VALUES ('David
+Miller', 'IT', 55000);
+SELECT * FROM employee_log;
+3. Creating a BEFORE UPDATE Trigger
+Definition: This trigger runs before an update
+occurs. Example: Ensure salaries do not go below
+30,000.
+DELIMITER //
+CREATE TRIGGER before_salary_update
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+IF NEW.salary < 30000 THEN
+SET NEW.salary = 30000;
+END IF;
+END //
+DELIMITER ;
+Test the Trigger:
+UPDATE employees SET salary = 25000 WHERE id =
+2; SELECT * FROM employees;
+4. Creating an AFTER DELETE Trigger
+Definition: This trigger runs after a row is
+deleted. Example: Log employee deletions.
+DELIMITER //
+CREATE TRIGGER after_employee_delete
+AFTER DELETE ON employees
+FOR EACH ROW
+BEGIN
+INSERT INTO employee_log (employee_id, action_type)
+VALUES (OLD.id, 'DELETE');
+END //
+DELIMITER ;
+Test the Trigger:
+DELETE FROM employees WHERE id = 3;
+SELECT * FROM employee_log;
+5. Dropping a Trigger
+Example: Drop the after_employee_insert
+trigger. DROP TRIGGER after_employee_insert;
