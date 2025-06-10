@@ -1,0 +1,879 @@
+Practical 1 :-
+Implement DDL Statement. Create table , Modify
+table, Drop table
+Open sql Workbench application & write a query in sql
+script.
+Query 1 :-
+create table studentinfo(rollno int,student_name
+varchar(45),student_address varchar(45));
+Query 2 :- For checking or seeing the Table write this
+query. select * from studentinfo;
+Query 3 :- For Modify the table write belove query for
+modifying the table.
+alter table studentinfo add contactno int;
+alter table studentinfo drop contactno ;
+alter table studentinfo rename column rollno to
+student_id; alter table studentinfo modify student_id int;
+Query 4 :- For Drop or Delete a table write this query. drop
+table studentinfo;
+-------------------------------------------------------------------------------------------
+Practical 2 :-
+Implement DML Statement. Adding/Modify/Delete
+data using Insert/ Update/ Delete
+Step 1 :- Open Sql Workbench
+Step 2 :- Execute or Perform Table Creation
+Query Syntax :-
+Create table table_name(column_name1 data-type,
+column_name2 data-type, column_name3 datatype);
+Query :-
+create table studentinfo(rollno int,student_name
+varchar(45),student_address varchar(45));
+Step 3 :- After creating the table , now add the data in the
+table as follows :-
+Syntax :-
+Insert into table_name value
+(value1,value2,value3,…); Query :-
+insert into student value(1,"pratmesh","shirpur",5677628);
+Note :- To add multiple values at same time use following
+query
+insert into student
+values(2,"umesh","kapdneh",0977654534),(3,"vinita","dond
+a icha",5643546);
+Step 4 :- To update the value of table data use following
+query.
+Syntax :-
+Update tablename set column_name=”value”
+where Condition
+Query :-
+update student set s_name="shubham" where rollno=2
+Step 5 :- To view the data of table use following query :-
+Syntax :-
+Select column_name1, column_name2, column_name3
+from table_name;
+Query :-
+Select rollno,s_name,s_address from student;
+Step 6 :- To Delete the data from a table we can use Delete
+query.
+Syntax :-
+Delete from Table_name where condition ;
+Query :-
+Delete from student where s_name=”shubham”;
+Note :- To delete all data from table without destructing the
+table structure.Use following query :-
+Query :-
+Syntax :-
+Truncate table table_name;
+Example :-
+Truncate table student ;
+--------------------------------------------------------------------------------------------
+Practical 3 :-
+Implement Following Constraint.
+NULL And NOT NULL,Primary Key, Foreign Key
+Constraint,Unique Constraint,Check Constraint,Default
+Constraint
+∙ Open sql workbench in computer
+NULL & NOT NULL in table :-
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255) NOT NULL,
+Age int
+);
+As above query is used for specifying that all columns would
+not contain a null value due to NOT NULL constraint. If you
+want any column to have a NULL value simply do not add
+NOT NULL constraint during creation on table.
+Primary Key & Foreign Key in table :-
+The PRIMARY KEY constraint uniquely identifies each record
+in a table.
+Primary keys must contain UNIQUE values, and cannot
+contain NULL values.
+A table can have only ONE primary key; and in the table, this
+primary key can consist of single or multiple columns (fields).
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+Primary Key(Column_Name)
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+PRIMARY KEY (ID)
+);
+The FOREIGN KEY constraint is used to prevent actions that
+would destroy links between tables.
+A FOREIGN KEY is a field (or collection of fields) in one table,
+that refers to the PRIMARY KEY in another table.
+The table with the foreign key is called the child table, and
+the table with the primary key is called the referenced or
+parent table.
+The "PersonID" column in the "Persons" table is the PRIMARY
+KEY in the "Persons" table.
+The "PersonID" column in the "Orders" table is a FOREIGN
+KEY in the "Orders" table.
+The FOREIGN KEY constraint prevents invalid data from being
+inserted into the foreign key column, because it has to be
+one of the values contained in the parent table.
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+Primary Key(Column_Name),
+Foreign key (Column_Name) References
+Table_Name(column_name)
+);
+Example :-
+CREATE TABLE Orders (
+OrderID int NOT NULL,
+OrderNumber int NOT NULL,
+PersonID int,
+PRIMARY KEY (OrderID),
+FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+UNIQUE Key :-
+The UNIQUE constraint ensures that all values in a column
+are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a
+guarantee for uniqueness for a column or set of columns.
+A PRIMARY KEY constraint automatically has
+a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table,
+but only one PRIMARY KEY constraint per table.
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+UNIQUE(Column_Name)
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+UNIQUE (ID)
+);
+Check Constraint :-
+The CHECK constraint is used to limit the value range that can
+be placed in a column.
+If you define a CHECK constraint on a column it will allow
+only certain values for this column.
+If you define a CHECK constraint on a table it can limit the
+values in certain columns based on values in other columns in
+the row.
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+CHECK (Age>=18)
+);
+The following SQL creates a CHECK constraint on the "Age"
+column when the "Persons" table is created.
+The CHECK constraint ensures that the age of a person must
+be 18, or older.
+Default Constraint :-
+The DEFAULT constraint is used to set a default value for a
+column.
+The default value will be added to all new records, if no other
+value is specified.
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+City varchar(255) DEFAULT 'Sandnes'
+);
+The DEFAULT constraint can also be used to insert system
+values, by using functions like GETDATE():
+CREATE TABLE Orders (
+ID int NOT NULL,
+OrderNumber int NOT NULL,
+OrderDate date DEFAULT GETDATE()
+);
+------------------------------------------------------------------------------------------------------------
+Practical 4 :-
+Implement following clauses.
+• Simple select clause
+• Accessing specific data with Where Clause
+• Ordered By/ Distinct/Group By Clause
+1. Simple SELECT Clause
+Step 1:
+Suppose we have a table named Employees with the following data:
+
+Step 2: To get all the columns from the Employees table: SELECT
+* FROM Employees;
+This will return all columns for all rows.
+
+Step 3: To retrieve specific columns (e.g., Name and Department):
+SELECT Name, Department FROM Employees
+
+2. Accessing Specific Data with WHERE Clause
+Step 1: Let's use the same Employees table.
+
+Step 2: If we want to find employees who work in the HR department:
+SELECT * FROM Employees WHERE Department = 'HR';
+
+Step 3: You can use multiple conditions to filter. For example, to find
+employees who are in the HR department and are older than 30:
+SELECT * FROM Employees WHERE Department =
+'HR' AND Age > 30;
+
+3. ORDER BY / DISTINCT / GROUP BY Clauses
+a) ORDER BY Clause
+Step 1: Let's retrieve all employees sorted by their Age in ascending
+order:
+SELECT * FROM Employees ORDER BY Age ASC;
+
+Step 2: To sort by Age in descending order:
+SELECT * FROM Employees ORDER BY Age DESC;
+
+b) DISTINCT Clause
+Step 1: If we want to get a list of distinct departments:
+SELECT DISTINCT Department FROM Employees;
+
+Step 2: If you want distinct combinations of Department and Age:
+SELECT DISTINCT Department, Age FROM Employees;
+
+c) GROUP BY Clause
+Step 1: To count how many employees are in each department:
+SELECT Department, COUNT(*) FROM Employees
+GROUP BY Department
+
+Step 2: If we want to find the average age of employees in each
+department:
+
+SELECT Department, AVG(Age) FROM Employees
+GROUP BY Department;
+
+Step 3: If we want to apply a condition to grouped data (e.g., departments with
+more than one employee):
+SELECT Department, COUNT(*)
+FROM Employees
+GROUP BY Department
+HAVING COUNT(*) > 1;
+----------------------------------------------------------------------------------------------------
+Practical 5 :-
+Implement following clauses.
+AVG, COUNT, MAX, MIN, SUM, CUBE
+1. Create a Sample Table with Data
+Before implementing aggregate functions, let's create a sample table
+and insert some values.
+CREATE TABLE sales_data (
+id INT PRIMARY KEY,
+region VARCHAR(50),
+category VARCHAR(50),
+price DECIMAL(10,2),
+sales_amount DECIMAL(10,2)
+);
+INSERT INTO sales_data (id, region, category, price, sales_amount)
+VALUES (1, 'North', 'Electronics', 500.00, 1500.00),
+(2, 'South', 'Clothing', 200.00, 800.00),
+(3, 'North', 'Furniture', 700.00, 2100.00),
+(4, 'West', 'Electronics', 450.00, 1350.00),
+(5, 'East', 'Clothing', 300.00, 900.00);
+2. AVG() - Average Function
+Definition: The AVG() function calculates the average value of a
+numeric column.
+Example: Find the average price of products.
+SELECT AVG(price) AS average_price FROM sales_data;
+Expected Output: The result will show the average price of all products.
+3. COUNT() - Count Function
+Definition: The COUNT() function returns the number of rows that
+match a specified condition.
+Example 1: Count the total number of records in the sales_data
+table. SELECT COUNT(*) AS total_records FROM sales_data;
+Example 2: Count the number of distinct categories.
+SELECT COUNT(DISTINCT category) AS total_categories FROM sales_data;
+4. MAX() - Maximum Function
+Definition: The MAX() function returns the highest value in a
+column. Example: Find the highest price in the sales_data table.
+SELECT MAX(price) AS highest_price FROM sales_data;
+5. MIN() - Minimum Function
+Definition: The MIN() function returns the lowest value in a
+column. Example: Find the lowest price in the sales_data table.
+SELECT MIN(price) AS lowest_price FROM sales_data;
+6. SUM() - Sum Function
+Definition: The SUM() function calculates the total sum of a numeric
+column.
+Example: Find the total sales amount.
+SELECT SUM(sales_amount) AS total_sales FROM sales_data;
+7. CUBE() - Grouping with Cube Function
+Definition: The CUBE() function allows you to generate subtotals and
+grand totals for multiple grouping sets.
+Example: Calculate sales based on region and category with subtotals.
+SELECT region, category, SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY CUBE(region, category);
+Expected Output:
+∙ Total sales per region and category.
+∙ Total sales per region.
+∙ Total sales per category.
+∙ Grand total of sales.
+-------------------------------------------------------------------------------------------------------------------------------------
+Practical 6 :-
+Implement all String functions.
+1. Create a Sample Table with Data
+Before implementing string functions, let's create a sample table and insert some
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50),
+email VARCHAR(100)
+);
+INSERT INTO employees (id, name, department, email)
+VALUES (1, 'Alice Johnson', 'HR',
+'alice.johnson@example.com'),
+(2, 'Bob Smith', 'IT', 'bob.smith@example.com'),
+(3, 'Charlie Brown', 'Finance', 'charlie.brown@example.com');
+2. UPPER() - Convert to Uppercase
+Definition: Converts a string to uppercase.
+Example: Convert employee names to uppercase.
+SELECT UPPER(name) AS upper_name FROM employees;
+3. LOWER() - Convert to Lowercase
+Definition: Converts a string to lowercase.
+Example: Convert employee emails to lowercase.
+SELECT LOWER(email) AS lower_email FROM employees;
+4. LENGTH() - Find Length of a String
+Definition: Returns the number of characters in a string.
+Example: Find the length of each employee's name.
+SELECT name, LENGTH(name) AS name_length FROM employees
+5. SUBSTRING() - Extract Part of a String
+Definition: Extracts a substring from a string.
+Example: Extract the first 5 characters from employee names. SELECT
+name, SUBSTRING(name, 1, 5) AS name_part FROM employees;
+6. CONCAT() - Concatenate Strings
+Definition: Combines two or more strings.
+Example: Concatenate employee name and department.
+SELECT CONCAT(name, ' - ', department) AS full_info FROM employees;
+7. REPLACE() - Replace Substring in a String
+Definition: Replaces occurrences of a substring within a
+string. Example: Replace '.' with '-' in email addresses.
+SELECT email, REPLACE(email, '.', '-') AS modified_email FROM employees;
+8. TRIM() - Remove Leading and Trailing Spaces
+Definition: Removes spaces from the beginning and end of a
+string. Example: Trim spaces from employee names.
+SELECT name, TRIM(name) AS trimmed_name FROM employees;
+9. LEFT() - Get Left Part of a String
+Definition: Extracts a specified number of characters from the
+left. Example: Get the first 3 characters of employee names.
+SELECT name, LEFT(name, 3) AS left_part FROM employees;
+10. RIGHT() - Get Right Part of a String
+Definition: Extracts a specified number of characters from the
+right. Example: Get the last 3 characters of employee names.
+SELECT name, RIGHT(name, 3) AS right_part FROM employees;
+---------------------------------------------------------------------------------------------------------------------------------
+Practical 7 :-
+Implement Date and Time Functions.
+1. Create a Sample Table with Data
+Before implementing date and time functions, let's create a sample table and insert
+some values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+join_date DATE,
+last_login TIMESTAMP
+);
+INSERT INTO employees (id, name, join_date, last_login)
+VALUES (1, 'Alice Johnson', '2022-01-15', '2024-03-25 14:30:00'),
+(2, 'Bob Smith', '2021-06-10', '2024-03-25 09:15:00'),
+(3, 'Charlie Brown', '2023-09-05', '2024-03-24 18:45:00');
+2. CURRENT_DATE() - Get Current Date
+Definition: Returns the current date.
+Example:
+SELECT CURRENT_DATE() AS today_date;
+3. CURRENT_TIME() - Get Current Time
+Definition: Returns the current time.
+Example:
+SELECT CURRENT_TIME() AS current_time;
+4. NOW() - Get Current Date and Time
+Definition: Returns the current date and time.
+Example:
+SELECT NOW() AS current_datetime;
+5. DATE() - Extract Date from Timestamp
+Definition: Extracts the date portion from a timestamp.
+Example: Extract join date from last login timestamp.
+SELECT name, DATE(last_login) AS login_date FROM employees;
+6. TIME() - Extract Time from Timestamp
+Definition: Extracts the time portion from a timestamp.
+Example: Extract login time from last login timestamp.
+SELECT name, TIME(last_login) AS login_time FROM employees;
+7. YEAR(), MONTH(), DAY() - Extract Year, Month, and Day
+Definition: Extracts specific parts of a date.
+Example: Get the year, month, and day from the join date.
+SELECT name, YEAR(join_date) AS join_year, MONTH(join_date) AS join_month,
+DAY(join_date) AS join_day FROM employees;
+8. HOUR(), MINUTE(), SECOND() - Extract Time
+Components Definition: Extracts hour, minute, and second
+from a timestamp.
+Example: Get hour, minute, and second from the last login time.
+SELECT name, HOUR(last_login) AS login_hour, MINUTE(last_login) AS
+login_minute, SECOND(last_login) AS login_second FROM employees;
+9. DATE_ADD() - Add Interval to a Date
+Definition: Adds a specified interval to a date.
+Example: Add 30 days to the join date.
+SELECT name, join_date, DATE_ADD(join_date, INTERVAL 30 DAY) AS new_date
+FROM employees;
+10. DATEDIFF() - Difference Between Two Dates
+Definition: Returns the number of days between two dates.
+Example: Calculate the number of days an employee has been in the company.
+SELECT name, DATEDIFF(CURRENT_DATE(), join_date) AS days_in_company
+FROM employees;
+11. TIMEDIFF() - Difference Between Two Time Values
+Definition: Returns the difference between two time values.
+Example: Calculate the difference between the current time and last login.
+SELECT name, TIMEDIFF(NOW(), last_login) AS time_since_login FROM
+employees;
+12. STR_TO_DATE() - Convert String to Date
+Definition: Converts a string into a date format.
+Example: Convert a string into a date format.
+SELECT STR_TO_DATE('25-03-2024', '%d-%m-%Y') AS converted_date;
+13. DATE_FORMAT() - Format Date Output
+Definition: Formats a date in a specific format.
+Example: Display join date in 'DD/MM/YYYY' format.
+SELECT name, DATE_FORMAT(join_date, '%d/%m/%Y') AS formatted_date FROM
+employees;
+----------------------------------------------------------------------------------------------------------------
+Practical 8 :-
+Implement use of UNION, INTERSECTION, SET DIFFERENCE.
+1. Create Sample Tables with Data
+Before implementing set operations, let's create two sample tables and insert some
+values.
+CREATE TABLE employees_A (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50)
+);
+INSERT INTO employees_A (id, name, department) VALUES
+(1, 'Alice Johnson', 'HR'),
+(2, 'Bob Smith', 'IT'),
+(3, 'Charlie Brown', 'Finance');
+CREATE TABLE employees_B (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50)
+);
+INSERT INTO employees_B (id, name, department) VALUES
+(2, 'Bob Smith', 'IT'),
+(3, 'Charlie Brown', 'Finance'),
+(4, 'David Miller', 'Marketing');
+2. UNION - Combine Results from Two Queries
+Definition: The UNION operator combines the results of two queries and removes
+duplicate rows.
+Example: Retrieve all unique employees from both tables.
+SELECT * FROM employees_A
+UNION
+SELECT * FROM employees_B;
+3. UNION ALL - Combine Results Without Removing Duplicates
+Definition: The UNION ALL operator combines the results of two queries and
+retains duplicates.
+Example: Retrieve all employees from both tables, including duplicates.
+SELECT * FROM employees_A
+UNION ALL
+SELECT * FROM employees_B;
+4. INTERSECTION - Find Common Records
+Definition: SQL does not have a direct INTERSECT keyword in MySQL, but we can
+achieve it using INNER JOIN.
+Example: Retrieve employees who are present in both tables.
+SELECT employees_A.* FROM employees_A
+INNER JOIN employees_B ON employees_A.id = employees_B.id;
+5. SET DIFFERENCE - Find Records in One Table but Not in the Other
+Definition: SQL does not have a direct EXCEPT or MINUS keyword in MySQL, but
+we can use LEFT JOIN and WHERE.
+Example: Retrieve employees who are in employees_A but not in employees_B.
+SELECT * FROM employees_A
+LEFT JOIN employees_B ON employees_A.id =
+employees_B.id WHERE employees_B.id IS NULL;
+Example: Retrieve employees who are in employees_B but not in employees_A.
+SELECT * FROM employees_B
+LEFT JOIN employees_A ON employees_B.id = employees_A.id
+WHERE employees_A.id IS NULL;
+--------------------------------------------------------------------------------------------------------------------------------------
+Practical 9 :-
+Implement Nested Queries & all types of JOIN operation
+1. Create Sample Tables with Data
+Before implementing nested queries and joins, let's create sample tables
+and insert values.
+CREATE TABLE departments (
+id INT PRIMARY KEY,
+name VARCHAR(100)
+);
+INSERT INTO departments (id, name) VALUES
+(1, 'HR'),
+(2, 'IT'),
+(3, 'Finance');
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department_id INT,
+salary INT,
+FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+INSERT INTO employees (id, name, department_id, salary)
+VALUES (1, 'Alice Johnson', 1, 50000),
+(2, 'Bob Smith', 2, 60000),
+(3, 'Charlie Brown', 3, 70000),
+(4, 'David Miller', 2, 55000);
+2. Nested Queries (Subqueries)
+a. Find Employees with the Highest Salary in Their
+Department SELECT * FROM employees WHERE salary = (
+SELECT MAX(salary) FROM employees
+);
+b. Find Employees in the IT Department Using a
+Subquery SELECT * FROM employees WHERE
+department_id = ( SELECT id FROM departments WHERE
+name = 'IT' );
+c. Find Employees Earning More Than the Average
+Salary SELECT * FROM employees WHERE salary > (
+SELECT AVG(salary) FROM employees
+);
+3. JOIN Operations
+a. INNER JOIN - Get Employee Details Along with Their
+Department SELECT employees.name, departments.name AS
+department, employees.salary
+FROM employees
+INNER JOIN departments ON employees.department_id =
+departments.id;
+b. LEFT JOIN - Get All Employees, Even Those Without a
+Department
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+LEFT JOIN departments ON employees.department_id =
+departments.id;
+c. RIGHT JOIN - Get All Departments, Even Those Without
+Employees
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+RIGHT JOIN departments ON employees.department_id =
+departments.id;
+d. FULL OUTER JOIN (Using UNION in MySQL)
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+LEFT JOIN departments ON employees.department_id =
+departments.id UNION
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+RIGHT JOIN departments ON employees.department_id =
+departments.id;
+e. CROSS JOIN - Get All Possible Combinations of Employees and
+Departments
+SELECT employees.name, departments.name AS
+department FROM employees
+CROSS JOIN departments;
+------------------------------------------------------------------------------------------------------------------------------
+
+Practical 10 :-
+Implement practical performing different operations on a view.
+1. Create Sample Tables with Data
+Before working with views, let's create a sample table and insert values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (id, name, department, salary)
+VALUES (1, 'Alice Johnson', 'HR', 50000),
+(2, 'Bob Smith', 'IT', 60000),
+(3, 'Charlie Brown', 'Finance', 70000),
+(4, 'David Miller', 'IT', 55000);
+2. Creating a Simple View
+Definition: A view is a virtual table that is based on the result of a
+query. Example: Create a view for IT department employees.
+CREATE VIEW IT_Employees AS
+SELECT id, name, salary FROM employees WHERE department =
+'IT'; Query the View:
+SELECT * FROM IT_Employees;
+3. Creating a View with Aggregation
+Example: Create a view to get the average salary of employees by
+department.
+CREATE VIEW Avg_Salary AS
+SELECT department, AVG(salary) AS avg_salary FROM employees
+GROUP BY department;
+Query the View:
+SELECT * FROM Avg_Salary;
+4. Updating Data through a View
+Example: Update an employee’s salary using a view.
+UPDATE IT_Employees SET salary = 62000 WHERE id =
+2; Check the update:
+SELECT * FROM IT_Employees;
+SELECT * FROM employees WHERE id = 2;
+(Note: Not all views are updatable; it depends on their complexity.)
+5. Dropping a View
+Example: Drop the IT_Employees view.
+DROP VIEW IT_Employees;
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Practical 11 :-
+Implement use of Procedures.
+1. Create Sample Table with Data
+Before working with stored procedures, let's create a sample table and
+insert values.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000),
+('David Miller', 'IT', 55000);
+2. Creating a Simple Stored Procedure
+Definition: A stored procedure is a precompiled collection of SQL
+statements that can be executed as a single unit.
+Example: Create a procedure to fetch all employees.
+DELIMITER //
+CREATE PROCEDURE GetAllEmployees()
+BEGIN
+SELECT * FROM employees;
+END //
+DELIMITER ;
+Call the Procedure:
+CALL GetAllEmployees();
+3. Stored Procedure with Input Parameter
+Example: Create a procedure to fetch employees by department.
+DELIMITER //
+CREATE PROCEDURE GetEmployeesByDepartment(IN dept_name
+VARCHAR(50))
+BEGIN
+SELECT * FROM employees WHERE department = dept_name;
+END //
+DELIMITER ;
+Call the Procedure:
+CALL GetEmployeesByDepartment('IT');
+4. Stored Procedure with Output Parameter
+Example: Create a procedure to return the total number of employees.
+DELIMITER //
+CREATE PROCEDURE GetEmployeeCount(OUT total
+INT) BEGIN
+SELECT COUNT(*) INTO total FROM employees;
+END //
+DELIMITER ;
+Call the Procedure:
+CALL GetEmployeeCount(@count);
+SELECT @count;
+5. Stored Procedure with Input and Output
+Parameters Example: Get the total salary for a specific
+department.
+DELIMITER //
+CREATE PROCEDURE GetTotalSalary(IN dept_name VARCHAR(50),
+OUT total_salary INT)
+BEGIN
+SELECT SUM(salary) INTO total_salary FROM employees WHERE
+department = dept_name;
+END //
+DELIMITER ;
+Call the Procedure:
+CALL GetTotalSalary('IT', @total_salary);
+SELECT @total_salary;
+6. Dropping a Stored Procedure
+Example: Drop the GetAllEmployees procedure.
+DROP PROCEDURE GetAllEmployees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Practical 12 :-
+Implement use of Triggers.
+1. Create Sample Tables with Data
+Before working with triggers, let's create a sample table and insert
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000);
+We will also create a log table to store changes:
+CREATE TABLE employee_log (
+log_id INT PRIMARY KEY AUTO_INCREMENT,
+employee_id INT,
+action_type VARCHAR(50),
+log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+2. Creating an AFTER INSERT Trigger
+Definition: This trigger runs after a new row is
+inserted. Example: Log employee insertions.
+DELIMITER //
+CREATE TRIGGER after_employee_insert
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+INSERT INTO employee_log (employee_id, action_type)
+VALUES (NEW.id, 'INSERT');
+END //
+DELIMITER ;
+Test the Trigger:
+INSERT INTO employees (name, department, salary) VALUES ('David
+Miller', 'IT', 55000);
+SELECT * FROM employee_log;
+3. Creating a BEFORE UPDATE Trigger
+Definition: This trigger runs before an update
+occurs. Example: Ensure salaries do not go below
+30,000.
+DELIMITER //
+CREATE TRIGGER before_salary_update
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+IF NEW.salary < 30000 THEN
+SET NEW.salary = 30000;
+END IF;
+END //
+DELIMITER ;
+Test the Trigger:
+UPDATE employees SET salary = 25000 WHERE id =
+2; SELECT * FROM employees;
+4. Creating an AFTER DELETE Trigger
+Definition: This trigger runs after a row is
+deleted. Example: Log employee deletions.
+DELIMITER //
+CREATE TRIGGER after_employee_delete
+AFTER DELETE ON employees
+FOR EACH ROW
+BEGIN
+INSERT INTO employee_log (employee_id, action_type)
+VALUES (OLD.id, 'DELETE');
+END //
+DELIMITER ;
+Test the Trigger:
+DELETE FROM employees WHERE id = 3;
+SELECT * FROM employee_log;
+5. Dropping a Trigger
+Example: Drop the after_employee_insert
+trigger. DROP TRIGGER after_employee_insert;
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Practical 13 :-
+Implement use of Cursor.
+1. Create Sample Table with Data
+Before working with cursors, let's create a sample table and insert
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000),
+('David Miller', 'IT', 55000);
+2. Understanding Cursors
+Definition: A cursor is a database object used to retrieve and process
+multiple rows, one at a time.
+Example: Using a Cursor to Iterate Over
+Employees DELIMITER //
+CREATE PROCEDURE ListEmployees()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_name VARCHAR(100);
+DECLARE emp_salary INT;
+DECLARE cur CURSOR FOR SELECT name, salary FROM
+employees;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =
+TRUE;
+OPEN cur;
+read_loop: LOOP
+FETCH cur INTO emp_name, emp_salary;
+IF done THEN
+LEAVE read_loop;
+END IF;
+SELECT CONCAT('Employee: ', emp_name, ' - Salary: ',
+emp_salary) AS Employee_Details;
+END LOOP;
+CLOSE cur;
+END //
+DELIMITER ;
+Calling the Procedure:
+CALL ListEmployees();
+3. Using Cursor with an UPDATE Operation
+Example: Increase salary of all IT department employees by 10% using
+a cursor.
+DELIMITER //
+CREATE PROCEDURE UpdateITSalary()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_id INT;
+DECLARE cur CURSOR FOR SELECT id FROM employees WHERE
+department = 'IT';
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =
+TRUE;
+OPEN cur;
+read_loop: LOOP
+FETCH cur INTO emp_id;
+IF done THEN
+LEAVE read_loop;
+END IF;
+UPDATE employees SET salary = salary * 1.1 WHERE id =
+emp_id;
+END LOOP;
+CLOSE cur;
+END //
+DELIMITER ;
+Calling the Procedure:
+CALL UpdateITSalary();
+SELECT * FROM employees;
+4. Dropping a Cursor Procedure
+Example: Drop the ListEmployees procedure.
+DROP PROCEDURE ListEmployees;
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Practical 14 :-
+Implement use of database connectivity with front end tools like
+– VB.NET, C#.NET, JAVA etc
+1. Database Setup
+Before connecting a front-end application, let's create a sample table
+and insert data.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000);
+2. Database Connectivity in Java
+Example: Connecting to MySQL Database in
+Java import java.sql.*;
+public class DatabaseConnection {
+public static void main(String[] args) {
+String url = "jdbc:mysql://localhost:3306/your_database";
+String user = "root";
+String password = "password";
+try {
+Connection conn = DriverManager.getConnection(url, user,
+password);
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT * FROM
+employees");
+while (rs.next()) {
+System.out.println("ID: " + rs.getInt("id") + ", Name: " +
+rs.getString("name"));
+}
+conn.close();
+} catch (SQLException e) {
+e.printStackTrace();
+}
+}
+}
