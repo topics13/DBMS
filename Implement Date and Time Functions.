@@ -1,0 +1,68 @@
+1. Create a Sample Table with Data
+Before implementing date and time functions, let's create a sample table and insert
+some values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+join_date DATE,
+last_login TIMESTAMP
+);
+INSERT INTO employees (id, name, join_date, last_login)
+VALUES (1, 'Alice Johnson', '2022-01-15', '2024-03-25 14:30:00'),
+(2, 'Bob Smith', '2021-06-10', '2024-03-25 09:15:00'),
+(3, 'Charlie Brown', '2023-09-05', '2024-03-24 18:45:00');
+2. CURRENT_DATE() - Get Current Date
+Definition: Returns the current date.
+Example:
+SELECT CURRENT_DATE() AS today_date;
+3. CURRENT_TIME() - Get Current Time
+Definition: Returns the current time.
+Example:
+SELECT CURRENT_TIME() AS current_time;
+4. NOW() - Get Current Date and Time
+Definition: Returns the current date and time.
+Example:
+SELECT NOW() AS current_datetime;
+5. DATE() - Extract Date from Timestamp
+Definition: Extracts the date portion from a timestamp.
+Example: Extract join date from last login timestamp.
+SELECT name, DATE(last_login) AS login_date FROM employees;
+6. TIME() - Extract Time from Timestamp
+Definition: Extracts the time portion from a timestamp.
+Example: Extract login time from last login timestamp.
+SELECT name, TIME(last_login) AS login_time FROM employees;
+7. YEAR(), MONTH(), DAY() - Extract Year, Month, and Day
+Definition: Extracts specific parts of a date.
+Example: Get the year, month, and day from the join date.
+SELECT name, YEAR(join_date) AS join_year, MONTH(join_date) AS join_month,
+DAY(join_date) AS join_day FROM employees;
+8. HOUR(), MINUTE(), SECOND() - Extract Time
+Components Definition: Extracts hour, minute, and second
+from a timestamp.
+Example: Get hour, minute, and second from the last login time.
+SELECT name, HOUR(last_login) AS login_hour, MINUTE(last_login) AS
+login_minute, SECOND(last_login) AS login_second FROM employees;
+9. DATE_ADD() - Add Interval to a Date
+Definition: Adds a specified interval to a date.
+Example: Add 30 days to the join date.
+SELECT name, join_date, DATE_ADD(join_date, INTERVAL 30 DAY) AS new_date
+FROM employees;
+10. DATEDIFF() - Difference Between Two Dates
+Definition: Returns the number of days between two dates.
+Example: Calculate the number of days an employee has been in the company.
+SELECT name, DATEDIFF(CURRENT_DATE(), join_date) AS days_in_company
+FROM employees;
+11. TIMEDIFF() - Difference Between Two Time Values
+Definition: Returns the difference between two time values.
+Example: Calculate the difference between the current time and last login.
+SELECT name, TIMEDIFF(NOW(), last_login) AS time_since_login FROM
+employees;
+12. STR_TO_DATE() - Convert String to Date
+Definition: Converts a string into a date format.
+Example: Convert a string into a date format.
+SELECT STR_TO_DATE('25-03-2024', '%d-%m-%Y') AS converted_date;
+13. DATE_FORMAT() - Format Date Output
+Definition: Formats a date in a specific format.
+Example: Display join date in 'DD/MM/YYYY' format.
+SELECT name, DATE_FORMAT(join_date, '%d/%m/%Y') AS formatted_date FROM
+employees;
