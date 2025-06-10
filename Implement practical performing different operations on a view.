@@ -1,0 +1,38 @@
+1. Create Sample Tables with Data
+Before working with views, let's create a sample table and insert values.
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (id, name, department, salary)
+VALUES (1, 'Alice Johnson', 'HR', 50000),
+(2, 'Bob Smith', 'IT', 60000),
+(3, 'Charlie Brown', 'Finance', 70000),
+(4, 'David Miller', 'IT', 55000);
+2. Creating a Simple View
+Definition: A view is a virtual table that is based on the result of a
+query. Example: Create a view for IT department employees.
+CREATE VIEW IT_Employees AS
+SELECT id, name, salary FROM employees WHERE department =
+'IT'; Query the View:
+SELECT * FROM IT_Employees;
+3. Creating a View with Aggregation
+Example: Create a view to get the average salary of employees by
+department.
+CREATE VIEW Avg_Salary AS
+SELECT department, AVG(salary) AS avg_salary FROM employees
+GROUP BY department;
+Query the View:
+SELECT * FROM Avg_Salary;
+4. Updating Data through a View
+Example: Update an employee’s salary using a view.
+UPDATE IT_Employees SET salary = 62000 WHERE id =
+2; Check the update:
+SELECT * FROM IT_Employees;
+SELECT * FROM employees WHERE id = 2;
+(Note: Not all views are updatable; it depends on their complexity.)
+5. Dropping a View
+Example: Drop the IT_Employees view.
+DROP VIEW IT_Employees;
