@@ -1,0 +1,72 @@
+1. Create Sample Table with Data
+Before working with cursors, let's create a sample table and insert
+values.
+CREATE TABLE employees (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100),
+department VARCHAR(50),
+salary INT
+);
+INSERT INTO employees (name, department, salary)
+VALUES ('Alice Johnson', 'HR', 50000),
+('Bob Smith', 'IT', 60000),
+('Charlie Brown', 'Finance', 70000),
+('David Miller', 'IT', 55000);
+2. Understanding Cursors
+Definition: A cursor is a database object used to retrieve and process
+multiple rows, one at a time.
+Example: Using a Cursor to Iterate Over
+Employees DELIMITER //
+CREATE PROCEDURE ListEmployees()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_name VARCHAR(100);
+DECLARE emp_salary INT;
+DECLARE cur CURSOR FOR SELECT name, salary FROM
+employees;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =
+TRUE;
+OPEN cur;
+read_loop: LOOP
+FETCH cur INTO emp_name, emp_salary;
+IF done THEN
+LEAVE read_loop;
+END IF;
+SELECT CONCAT('Employee: ', emp_name, ' - Salary: ',
+emp_salary) AS Employee_Details;
+END LOOP;
+CLOSE cur;
+END //
+DELIMITER ;
+Calling the Procedure:
+CALL ListEmployees();
+3. Using Cursor with an UPDATE Operation
+Example: Increase salary of all IT department employees by 10% using
+a cursor.
+DELIMITER //
+CREATE PROCEDURE UpdateITSalary()
+BEGIN
+DECLARE done INT DEFAULT FALSE;
+DECLARE emp_id INT;
+DECLARE cur CURSOR FOR SELECT id FROM employees WHERE
+department = 'IT';
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =
+TRUE;
+OPEN cur;
+read_loop: LOOP
+FETCH cur INTO emp_id;
+IF done THEN
+LEAVE read_loop;
+END IF;
+UPDATE employees SET salary = salary * 1.1 WHERE id =
+emp_id;
+END LOOP;
+CLOSE cur;
+END //
+DELIMITER ;
+Calling the Procedure:
+CALL UpdateITSalary();
+SELECT * FROM employees;
+4. Dropping a Cursor Procedure
+Example: Drop the ListEmployees procedure.
+DROP PROCEDURE ListEmployees;
