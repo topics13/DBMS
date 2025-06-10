@@ -1,0 +1,64 @@
+Open sql Workbench application & write a query in sql
+script.
+Query 1 :-
+create table studentinfo(rollno int,student_name
+varchar(45),student_address varchar(45));
+Query 2 :- For checking or seeing the Table write this
+query. select * from studentinfo;
+Query 3 :- For Modify the table write belove query for
+modifying the table.
+alter table studentinfo add contactno int;
+alter table studentinfo drop contactno ;
+alter table studentinfo rename column rollno to
+student_id; alter table studentinfo modify student_id int;
+Query 4 :- For Drop or Delete a table write this query. drop
+table studentinfo;
+-------------------------------------------------------------------------------------------
+Practical 2 :-
+Implement DML Statement. Adding/Modify/Delete
+data using Insert/ Update/ Delete
+Step 1 :- Open Sql Workbench
+Step 2 :- Execute or Perform Table Creation
+Query Syntax :-
+Create table table_name(column_name1 data-type,
+column_name2 data-type, column_name3 datatype);
+Query :-
+create table studentinfo(rollno int,student_name
+varchar(45),student_address varchar(45));
+Step 3 :- After creating the table , now add the data in the
+table as follows :-
+Syntax :-
+Insert into table_name value
+(value1,value2,value3,…); Query :-
+insert into student value(1,"pratmesh","shirpur",5677628);
+Note :- To add multiple values at same time use following
+query
+insert into student
+values(2,"umesh","kapdneh",0977654534),(3,"vinita","dond
+a icha",5643546);
+Step 4 :- To update the value of table data use following
+query.
+Syntax :-
+Update tablename set column_name=”value”
+where Condition
+Query :-
+update student set s_name="shubham" where rollno=2
+Step 5 :- To view the data of table use following query :-
+Syntax :-
+Select column_name1, column_name2, column_name3
+from table_name;
+Query :-
+Select rollno,s_name,s_address from student;
+Step 6 :- To Delete the data from a table we can use Delete
+query.
+Syntax :-
+Delete from Table_name where condition ;
+Query :-
+Delete from student where s_name=”shubham”;
+Note :- To delete all data from table without destructing the
+table structure.Use following query :-
+Query :-
+Syntax :-
+Truncate table table_name;
+Example :-
+Truncate table student ;
