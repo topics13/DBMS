@@ -1,0 +1,54 @@
+1. Create a Sample Table with Data
+Before implementing aggregate functions, let's create a sample table
+and insert some values.
+CREATE TABLE sales_data (
+id INT PRIMARY KEY,
+region VARCHAR(50),
+category VARCHAR(50),
+price DECIMAL(10,2),
+sales_amount DECIMAL(10,2)
+);
+INSERT INTO sales_data (id, region, category, price, sales_amount)
+VALUES (1, 'North', 'Electronics', 500.00, 1500.00),
+(2, 'South', 'Clothing', 200.00, 800.00),
+(3, 'North', 'Furniture', 700.00, 2100.00),
+(4, 'West', 'Electronics', 450.00, 1350.00),
+(5, 'East', 'Clothing', 300.00, 900.00);
+2. AVG() - Average Function
+Definition: The AVG() function calculates the average value of a
+numeric column.
+Example: Find the average price of products.
+SELECT AVG(price) AS average_price FROM sales_data;
+Expected Output: The result will show the average price of all products.
+3. COUNT() - Count Function
+Definition: The COUNT() function returns the number of rows that
+match a specified condition.
+Example 1: Count the total number of records in the sales_data
+table. SELECT COUNT(*) AS total_records FROM sales_data;
+Example 2: Count the number of distinct categories.
+SELECT COUNT(DISTINCT category) AS total_categories FROM sales_data;
+4. MAX() - Maximum Function
+Definition: The MAX() function returns the highest value in a
+column. Example: Find the highest price in the sales_data table.
+SELECT MAX(price) AS highest_price FROM sales_data;
+5. MIN() - Minimum Function
+Definition: The MIN() function returns the lowest value in a
+column. Example: Find the lowest price in the sales_data table.
+SELECT MIN(price) AS lowest_price FROM sales_data;
+6. SUM() - Sum Function
+Definition: The SUM() function calculates the total sum of a numeric
+column.
+Example: Find the total sales amount.
+SELECT SUM(sales_amount) AS total_sales FROM sales_data;
+7. CUBE() - Grouping with Cube Function
+Definition: The CUBE() function allows you to generate subtotals and
+grand totals for multiple grouping sets.
+Example: Calculate sales based on region and category with subtotals.
+SELECT region, category, SUM(sales_amount) AS total_sales
+FROM sales_data
+GROUP BY CUBE(region, category);
+Expected Output:
+∙ Total sales per region and category.
+∙ Total sales per region.
+∙ Total sales per category.
+∙ Grand total of sales.
