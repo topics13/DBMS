@@ -1,0 +1,73 @@
+1. Create Sample Tables with Data
+Before implementing nested queries and joins, let's create sample tables
+and insert values.
+CREATE TABLE departments (
+id INT PRIMARY KEY,
+name VARCHAR(100)
+);
+INSERT INTO departments (id, name) VALUES
+(1, 'HR'),
+(2, 'IT'),
+(3, 'Finance');
+CREATE TABLE employees (
+id INT PRIMARY KEY,
+name VARCHAR(100),
+department_id INT,
+salary INT,
+FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+INSERT INTO employees (id, name, department_id, salary)
+VALUES (1, 'Alice Johnson', 1, 50000),
+(2, 'Bob Smith', 2, 60000),
+(3, 'Charlie Brown', 3, 70000),
+(4, 'David Miller', 2, 55000);
+2. Nested Queries (Subqueries)
+a. Find Employees with the Highest Salary in Their
+Department SELECT * FROM employees WHERE salary = (
+SELECT MAX(salary) FROM employees
+);
+b. Find Employees in the IT Department Using a
+Subquery SELECT * FROM employees WHERE
+department_id = ( SELECT id FROM departments WHERE
+name = 'IT' );
+c. Find Employees Earning More Than the Average
+Salary SELECT * FROM employees WHERE salary > (
+SELECT AVG(salary) FROM employees
+);
+3. JOIN Operations
+a. INNER JOIN - Get Employee Details Along with Their
+Department SELECT employees.name, departments.name AS
+department, employees.salary
+FROM employees
+INNER JOIN departments ON employees.department_id =
+departments.id;
+b. LEFT JOIN - Get All Employees, Even Those Without a
+Department
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+LEFT JOIN departments ON employees.department_id =
+departments.id;
+c. RIGHT JOIN - Get All Departments, Even Those Without
+Employees
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+RIGHT JOIN departments ON employees.department_id =
+departments.id;
+d. FULL OUTER JOIN (Using UNION in MySQL)
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+LEFT JOIN departments ON employees.department_id =
+departments.id UNION
+SELECT employees.name, departments.name AS department,
+employees.salary
+FROM employees
+RIGHT JOIN departments ON employees.department_id =
+departments.id;
+e. CROSS JOIN - Get All Possible Combinations of Employees and
+Departments
+SELECT employees.name, departments.name AS
+department FROM employees
+CROSS JOIN departments;
