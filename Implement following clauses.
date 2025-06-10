@@ -1,0 +1,58 @@
+• Simple select clause
+• Accessing specific data with Where Clause
+• Ordered By/ Distinct/Group By Clause
+1. Simple SELECT Clause
+Step 1:
+Suppose we have a table named Employees with the following data:
+
+Step 2: To get all the columns from the Employees table: SELECT
+* FROM Employees;
+This will return all columns for all rows.
+
+Step 3: To retrieve specific columns (e.g., Name and Department):
+SELECT Name, Department FROM Employees
+
+2. Accessing Specific Data with WHERE Clause
+Step 1: Let's use the same Employees table.
+
+Step 2: If we want to find employees who work in the HR department:
+SELECT * FROM Employees WHERE Department = 'HR';
+
+Step 3: You can use multiple conditions to filter. For example, to find
+employees who are in the HR department and are older than 30:
+SELECT * FROM Employees WHERE Department =
+'HR' AND Age > 30;
+
+3. ORDER BY / DISTINCT / GROUP BY Clauses
+a) ORDER BY Clause
+Step 1: Let's retrieve all employees sorted by their Age in ascending
+order:
+SELECT * FROM Employees ORDER BY Age ASC;
+
+Step 2: To sort by Age in descending order:
+SELECT * FROM Employees ORDER BY Age DESC;
+
+b) DISTINCT Clause
+Step 1: If we want to get a list of distinct departments:
+SELECT DISTINCT Department FROM Employees;
+
+Step 2: If you want distinct combinations of Department and Age:
+SELECT DISTINCT Department, Age FROM Employees;
+
+c) GROUP BY Clause
+Step 1: To count how many employees are in each department:
+SELECT Department, COUNT(*) FROM Employees
+GROUP BY Department
+
+Step 2: If we want to find the average age of employees in each
+department:
+
+SELECT Department, AVG(Age) FROM Employees
+GROUP BY Department;
+
+Step 3: If we want to apply a condition to grouped data (e.g., departments with
+more than one employee):
+SELECT Department, COUNT(*)
+FROM Employees
+GROUP BY Department
+HAVING COUNT(*) > 1;
