@@ -1,0 +1,130 @@
+Constraint,Unique Constraint,Check Constraint,Default
+Constraint
+∙ Open sql workbench in computer
+NULL & NOT NULL in table :-
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255) NOT NULL,
+Age int
+);
+As above query is used for specifying that all columns would
+not contain a null value due to NOT NULL constraint. If you
+want any column to have a NULL value simply do not add
+NOT NULL constraint during creation on table.
+Primary Key & Foreign Key in table :-
+The PRIMARY KEY constraint uniquely identifies each record
+in a table.
+Primary keys must contain UNIQUE values, and cannot
+contain NULL values.
+A table can have only ONE primary key; and in the table, this
+primary key can consist of single or multiple columns (fields).
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+Primary Key(Column_Name)
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+PRIMARY KEY (ID)
+);
+The FOREIGN KEY constraint is used to prevent actions that
+would destroy links between tables.
+A FOREIGN KEY is a field (or collection of fields) in one table,
+that refers to the PRIMARY KEY in another table.
+The table with the foreign key is called the child table, and
+the table with the primary key is called the referenced or
+parent table.
+The "PersonID" column in the "Persons" table is the PRIMARY
+KEY in the "Persons" table.
+The "PersonID" column in the "Orders" table is a FOREIGN
+KEY in the "Orders" table.
+The FOREIGN KEY constraint prevents invalid data from being
+inserted into the foreign key column, because it has to be
+one of the values contained in the parent table.
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+Primary Key(Column_Name),
+Foreign key (Column_Name) References
+Table_Name(column_name)
+);
+Example :-
+CREATE TABLE Orders (
+OrderID int NOT NULL,
+OrderNumber int NOT NULL,
+PersonID int,
+PRIMARY KEY (OrderID),
+FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+UNIQUE Key :-
+The UNIQUE constraint ensures that all values in a column
+are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a
+guarantee for uniqueness for a column or set of columns.
+A PRIMARY KEY constraint automatically has
+a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table,
+but only one PRIMARY KEY constraint per table.
+Syntax :-
+CREATE TABLE Table_Name (
+Column_Name DataType Constraint,
+UNIQUE(Column_Name)
+);
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+UNIQUE (ID)
+);
+Check Constraint :-
+The CHECK constraint is used to limit the value range that can
+be placed in a column.
+If you define a CHECK constraint on a column it will allow
+only certain values for this column.
+If you define a CHECK constraint on a table it can limit the
+values in certain columns based on values in other columns in
+the row.
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+CHECK (Age>=18)
+);
+The following SQL creates a CHECK constraint on the "Age"
+column when the "Persons" table is created.
+The CHECK constraint ensures that the age of a person must
+be 18, or older.
+Default Constraint :-
+The DEFAULT constraint is used to set a default value for a
+column.
+The default value will be added to all new records, if no other
+value is specified.
+Example :-
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+City varchar(255) DEFAULT 'Sandnes'
+);
+The DEFAULT constraint can also be used to insert system
+values, by using functions like GETDATE():
+CREATE TABLE Orders (
+ID int NOT NULL,
+OrderNumber int NOT NULL,
+OrderDate date DEFAULT GETDATE()
+);
